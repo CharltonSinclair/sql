@@ -72,9 +72,10 @@ columns: customer_id; address_id; street_address; city; province; postal_code; c
 the address_id is now the primary key, and the customer_id is the foreign key for the customer_id table, where each row is a single address_id in this customer_addresses table, where each customer (customer_id) can have multiple addresses (assigned to multiple ids of address_id). This lists for each customer each customer address assigned to them, and the validity of the address (from when it began as their address, using valid_from, to when the address has been updated, using valid_to, otherwise being null if the customer address for this address_id is their current address. When a new address is added, aka a customer updates their address, then their current address, assigned by address_id, gets a completed cell in the valid_to column, the is_active (boolean) becomes "inactive" and the customer_id is subsequently given a new address_id, with valid_from being the start date of that new address being assigned to that customer, valid_to being null (empty) since it is their current address, and is_active being assigned "active" to show that this is the current active address of this customer (customer_id).
 
 With this method, there remains a full available history of the data for analysis, giving all the historical addresses for each customer and not needing to update all material/data from the past that used old customer addresses, since those old addresses will remain in storage and the new addresses will be used for future analysis. This does raise data storage cost, with the need to filter queries based on is_active to validate that the customer address used from the customer_addresses table remains their current/active address
-
+ 
 Relationship: customer_addresses has a many-to-one relationship with the customer table on customer_id. This is because each customer in the customer table gets assigned to many addresses (address_id) in the customer_addresses table for each address they have/update on their profile.
-```
+``` 
+
 
 
 ***

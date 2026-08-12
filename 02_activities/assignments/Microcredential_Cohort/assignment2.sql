@@ -286,4 +286,5 @@ WHERE vi.product_id = product_units.product_id
 ORDER BY vi.market_date DESC
 LIMIT 1
  ), 0);
+  
 --END QUERY
